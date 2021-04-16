@@ -3,8 +3,8 @@ package com.win;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.win.people.service.PeopleFirstNameService;
-import com.win.people.service.PeopleLastNameService;
+import com.win.people_firts_name.PeopleFirstNameService;
+import com.win.people_last_name.PeopleLastNameService;
 
 @Service
 public class PopulateTable {

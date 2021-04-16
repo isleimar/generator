@@ -1,4 +1,4 @@
-package com.win.people.repository;
+package com.win.people_firts_name;
 
 
 import java.util.List;
@@ -8,8 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.win.people.domain.PeopleFirstName;
 
 @Repository
 public interface PeopleFirstNameRepository extends JpaRepository<PeopleFirstName, Long>{

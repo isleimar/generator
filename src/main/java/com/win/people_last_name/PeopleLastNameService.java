@@ -1,4 +1,4 @@
-package com.win.people.service;
+package com.win.people_last_name;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,9 +9,8 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.win.people.domain.PeopleLastName;
-import com.win.people.repository.PeopleLastNameRepository;
-import com.win.service.ReadCsv;
+import com.win.people_firts_name.PeopleFirstNameService;
+import com.win.services.ReadCsv;
 
 @Service
 public class PeopleLastNameService {

@@ -1,4 +1,4 @@
-package com.win.user.domain;
+package com.win.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

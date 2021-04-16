@@ -1,13 +1,12 @@
-package com.win.user.service;
+package com.win.user;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.win.people.domain.SimplePeople;
-import com.win.service.RandomUtil;
-import com.win.user.domain.User;
+import com.win.services.RandomUtil;
+import com.win.simple_people.SimplePeople;
 
 @Service
 public class UserService {

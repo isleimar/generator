@@ -8,11 +8,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class GeneratorApplication implements CommandLineRunner{
-		
+			
 	@Autowired
 	PopulateTable populateTable;
 	@Value("${fill:false}")
 	private Boolean fill;	
+	
+	@Value("${data.file.lorem}")
+	private String pathLorem;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(GeneratorApplication.class, args);
@@ -20,8 +23,7 @@ public class GeneratorApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {				
-		if (fill) populateTable.start();
-		
+//		if (fill) populateTable.start();		
 	}
 
 }

@@ -3,25 +3,24 @@ package com.win.lorem;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.win.service.RandomUtil;
-import com.win.service.ReadCsv;
+import com.win.services.RandomUtil;
+import com.win.services.ReadCsv;
 
 @Service
 public class LoremRepository {
 	
 	private List<String> loremWords;
 	
-	public LoremRepository() {
-		String curDir = System.getProperty("user.dir");
-		String path = curDir + "/data/";
-		loadLorem(path + "lorem_ipsum.csv");		
-	}
+	@Value("${data.file.lorem}")
+	private String pathLorem;
 	
-	private void loadLorem(String fileName) {
+	private void loadLorem() {
+		if (loremWords != null) return;		
 		loremWords = new ArrayList<String>();
-		ReadCsv rc = new ReadCsv(fileName, ",");
+		ReadCsv rc = new ReadCsv(pathLorem, ",");
 		try {
 			try {
 				rc.openFile();
@@ -39,6 +38,7 @@ public class LoremRepository {
 	}
 	
 	public String getWord(int index) {
+		loadLorem();
 		if (loremWords.size() == 0) return "";
 		if (index > loremWords.size()) index = loremWords.size() -1;
 		return loremWords.get(index);

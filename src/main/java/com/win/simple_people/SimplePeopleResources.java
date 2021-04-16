@@ -1,4 +1,4 @@
-package com.win.people.resources;
+package com.win.simple_people;
 
 import java.util.List;
 
@@ -8,9 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.win.people.domain.SimplePeople;
-import com.win.people.service.SimplePeopleService;
 
 @RestController
 @RequestMapping("api/v1/simple_people")

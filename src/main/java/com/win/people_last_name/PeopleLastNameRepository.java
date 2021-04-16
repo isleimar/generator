@@ -1,4 +1,4 @@
-package com.win.people.repository;
+package com.win.people_last_name;
 
 import java.util.List;
 
@@ -7,8 +7,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.win.people.domain.PeopleLastName;
 
 @Repository
 public interface PeopleLastNameRepository extends PagingAndSortingRepository<PeopleLastName, Long>{

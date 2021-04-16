@@ -1,4 +1,4 @@
-package com.win.service;
+package com.win.services;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

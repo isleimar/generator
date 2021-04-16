@@ -1,4 +1,4 @@
-package com.win.people.domain;
+package com.win.people;
 
 public enum Gender {
 	M("MALE"),

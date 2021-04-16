@@ -1,4 +1,4 @@
-package com.win.people.service;
+package com.win.people_firts_name;
 
 
 import java.io.IOException;
@@ -8,10 +8,8 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.win.people.domain.Gender;
-import com.win.people.domain.PeopleFirstName;
-import com.win.people.repository.PeopleFirstNameRepository;
-import com.win.service.ReadCsv;
+import com.win.people.Gender;
+import com.win.services.ReadCsv;
 
 @Service
 public class PeopleFirstNameService {

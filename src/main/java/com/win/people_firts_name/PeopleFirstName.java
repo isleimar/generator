@@ -1,4 +1,4 @@
-package com.win.people.domain;
+package com.win.people_firts_name;
 
 import java.io.Serializable;
 
@@ -9,6 +9,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.win.people.Gender;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

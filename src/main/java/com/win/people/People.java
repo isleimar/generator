@@ -1,6 +1,5 @@
-package com.win.people.domain;
+package com.win.people;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
@@ -9,16 +8,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @ToString
-public class SimplePeople implements Serializable{
-	private static final long serialVersionUID = 1L;
-	
+public class People {
+	String username;
+	String password;	
 	String name;
-	LocalDate birthDate;
+	LocalDate birthdate;
 	Gender gender;	
+	
+	
 
 }

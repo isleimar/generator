@@ -1,4 +1,4 @@
-package com.win.people.service;
+package com.win.people;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -6,10 +6,10 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.win.people.domain.People;
-import com.win.people.domain.SimplePeople;
-import com.win.user.domain.User;
-import com.win.user.service.UserService;
+import com.win.simple_people.SimplePeople;
+import com.win.simple_people.SimplePeopleService;
+import com.win.user.User;
+import com.win.user.UserService;
 
 @Service
 public class PeopleService {

@@ -1,4 +1,4 @@
-package com.win.people.service;
+package com.win.simple_people;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -7,10 +7,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.win.people.domain.PeopleFirstName;
-import com.win.people.domain.PeopleLastName;
-import com.win.people.domain.SimplePeople;
-import com.win.service.RandomUtil;
+import com.win.people_firts_name.PeopleFirstName;
+import com.win.people_firts_name.PeopleFirstNameService;
+import com.win.people_last_name.PeopleLastName;
+import com.win.people_last_name.PeopleLastNameService;
+import com.win.services.RandomUtil;
 
 @Service
 public class SimplePeopleService {

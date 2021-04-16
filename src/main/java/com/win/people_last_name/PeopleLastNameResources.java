@@ -1,4 +1,4 @@
-package com.win.people.resources;
+package com.win.people_last_name;
 
 import java.util.List;
 
@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.win.people.domain.PeopleLastName;
-import com.win.people.service.PeopleLastNameService;
 
 @RestController
 @RequestMapping("api/v1/people_last_name")

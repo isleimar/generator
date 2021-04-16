@@ -1,4 +1,4 @@
-package com.win.people.domain;
+package com.win.people_last_name;
 
 import java.io.Serializable;
 

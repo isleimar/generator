@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.win.service.RandomUtil;
+import com.win.services.RandomUtil;
 
 @Service
 public class LoremService {
