@@ -17,7 +17,7 @@ public class RandomUtil {
 	private static final Integer MAX_PASSWD = 12;
 	
 	
-	public static Integer getRandomInt(int value) {
+	public static Integer getRandomInt(int value) {		
 		return ThreadLocalRandom
 				.current()
 				.nextInt(value);
@@ -33,6 +33,12 @@ public class RandomUtil {
 		return ThreadLocalRandom
 				.current()
 				.nextLong(origin, bound);
+	}
+	
+	public static Double getDoubleRandom(Double origin, Double bound) {
+		return ThreadLocalRandom
+				.current()
+				.nextDouble(origin, bound);
 	}
 	
 	public static <T> T getRandomItemList(List<T> originList) {

@@ -1,14 +1,14 @@
 package com.win.people_last_name;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
+import com.win.services.CsvToClass;
 import com.win.services.RandomUtil;
-import com.win.services.ReadCsv;
-
 
 @Repository
 public class PeopleLastNameRepository{
@@ -20,27 +20,15 @@ public class PeopleLastNameRepository{
 	
 	private void loadPeopleLastNames() {
 		if (peopleLastNames != null) return;
-		peopleLastNames = new ArrayList<PeopleLastName>();		
-		ReadCsv rc = new ReadCsv(fileName, ",");		
-		try {
-			rc.openFile();
-			while (rc.nextLine()) {
-				String name = rc.getValue(0);
-				peopleLastNames.add(PeopleLastName
+		peopleLastNames = new CsvToClass<PeopleLastName>(fileName, ",") {
+			@Override
+			protected PeopleLastName convert(HashMap<String, String> hash) {
+				return PeopleLastName
 						.builder()
-						.lastName(name)
-						.build());
+						.lastName(hash.get("last_name"))
+						.build();
 			}
-		}catch (Exception e) {
-			System.out.println("Falha ao abrir arquivo.");
-		} finally {
-			try {
-				if (rc != null)
-					rc.closeFile();
-			}catch (Exception e) {
-				System.out.println("Falha ao fechar arquivo.");
-			} 
-		}
+		}.loadCsv();
 	}
 	
 	public List<PeopleLastName> randomSearch(Integer count){

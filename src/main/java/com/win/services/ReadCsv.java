@@ -60,5 +60,9 @@ public class ReadCsv {
 	public String[] getColunms() {
 		return this.columns;
 	}
+	
+	public HashMap<String, String> getFiels(){
+		return fields;
+	}
 
 }

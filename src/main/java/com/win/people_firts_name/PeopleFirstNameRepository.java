@@ -1,7 +1,7 @@
 package com.win.people_firts_name;
 
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import com.win.people.Gender;
+import com.win.services.CsvToClass;
 import com.win.services.MyUtil;
 import com.win.services.RandomUtil;
-import com.win.services.ReadCsv;
 
 @Repository
 public class PeopleFirstNameRepository {
@@ -23,29 +23,17 @@ public class PeopleFirstNameRepository {
 	
 	private void loadPeopleFirstNames() {
 		if (peopleFirstNames != null) return;
-		peopleFirstNames = new ArrayList<PeopleFirstName>();		
-		ReadCsv rc = new ReadCsv(fileName, ",");		
-		try {
-			rc.openFile();
-			while (rc.nextLine()) {
-				Gender gender = MyUtil.getEnumFromString(Gender.class, rc.getValue("gender"));
-				String name = rc.getValue("first_name");
-				peopleFirstNames.add(PeopleFirstName
+		peopleFirstNames = new CsvToClass<PeopleFirstName>(fileName, ",") {
+			@Override
+			protected PeopleFirstName convert(HashMap<String, String> hash) {				
+				Gender gender = MyUtil.getEnumFromString(Gender.class, hash.get("gender"));
+				return PeopleFirstName
 						.builder()
-						.firstName(name)
+						.firstName(hash.get("first_name"))
 						.gender(gender)
-						.build());
+						.build();
 			}
-		}catch (Exception e) {
-			System.out.println("Falha ao abrir arquivo.");
-		} finally {
-			try {
-				if (rc != null)
-					rc.closeFile();
-			}catch (Exception e) {
-				System.out.println("Falha ao fechar arquivo.");
-			} 
-		}
+		}.loadCsv();
 	}
 		
 	public List<PeopleFirstName> randomSearch(Integer count){

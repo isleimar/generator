@@ -1,40 +1,30 @@
 package com.win.lorem;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
+import com.win.services.CsvToClass;
 import com.win.services.RandomUtil;
-import com.win.services.ReadCsv;
 
-@Service
+@Repository
 public class LoremRepository {
 	
 	private List<String> loremWords;
 	
 	@Value("${data.file.lorem}")
-	private String pathLorem;
+	private String fileName;
 	
 	private void loadLorem() {
-		if (loremWords != null) return;		
-		loremWords = new ArrayList<String>();
-		ReadCsv rc = new ReadCsv(pathLorem, ",");
-		try {
-			try {
-				rc.openFile();
-				while (rc.nextLine()) {
-					loremWords.add(rc.getValue(0));
-				}
-			}catch (Exception e) {
-				System.out.println("Falha ao carregar arquivo.");
-			}finally {
-				rc.closeFile();
+		if (loremWords != null) return;				
+		loremWords = new CsvToClass<String>(fileName, "#") {
+			@Override
+			protected String convert(HashMap<String, String> hash) {				
+				return hash.get("lorem");
 			}
-		}catch (Exception e) {
-			System.out.println("Falha ao carregar arquivo.");
-		}
+		}.loadCsv();
 	}
 	
 	public String getWord(int index) {
@@ -46,6 +36,7 @@ public class LoremRepository {
 	
 	
 	public String getRandomWord() {
+		loadLorem();
 		return RandomUtil.getRandomItemList(loremWords);
 	}
 	
