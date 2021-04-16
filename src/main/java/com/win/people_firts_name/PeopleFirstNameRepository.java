@@ -1,29 +1,69 @@
 package com.win.people_firts_name;
 
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+
+import com.win.people.Gender;
+import com.win.services.MyUtil;
+import com.win.services.RandomUtil;
+import com.win.services.ReadCsv;
 
 @Repository
-public interface PeopleFirstNameRepository extends JpaRepository<PeopleFirstName, Long>{
+public class PeopleFirstNameRepository {
 	
-//	@Transactional(readOnly=true)
-//	@Query("SELECT obj FROM Cidade obj WHERE obj.estado.id = :estadoId ORDER BY obj.nome")
-//	public List<Cidade> findCidades(@Param("estadoId") Integer estado_id);
+	private List<PeopleFirstName> peopleFirstNames;
 	
-	@Transactional(readOnly = true)
-	@Query(nativeQuery = true, value = "SELECT * FROM people_first_name ORDER BY RANDOM() LIMIT :count ")
-//	@Query("SELECT p FROM PeopleFirstName p ORDER BY RANDOM")
-	public List<PeopleFirstName> randomSearch(@Param("count") Integer count);
+	@Value("${data.file.people_first_name}")
+	private String fileName;
 	
-	@Transactional(readOnly = true)
-	@Query(nativeQuery = true, value = "SELECT * FROM people_first_name WHERE gender LIKE :gender ORDER BY RANDOM() LIMIT :count ")
-//	@Query("SELECT p FROM PeopleFirstName p WHERE p.gender LIKE :gender ORDER BY RANDOM")
-	public List<PeopleFirstName> randomSearchGender(@Param("count") Integer count, @Param("gender") String gender);
+	private void loadPeopleFirstNames() {
+		if (peopleFirstNames != null) return;
+		peopleFirstNames = new ArrayList<PeopleFirstName>();		
+		ReadCsv rc = new ReadCsv(fileName, ",");		
+		try {
+			rc.openFile();
+			while (rc.nextLine()) {
+				Gender gender = MyUtil.getEnumFromString(Gender.class, rc.getValue("gender"));
+				String name = rc.getValue("first_name");
+				peopleFirstNames.add(PeopleFirstName
+						.builder()
+						.firstName(name)
+						.gender(gender)
+						.build());
+			}
+		}catch (Exception e) {
+			System.out.println("Falha ao abrir arquivo.");
+		} finally {
+			try {
+				if (rc != null)
+					rc.closeFile();
+			}catch (Exception e) {
+				System.out.println("Falha ao fechar arquivo.");
+			} 
+		}
+	}
+		
+	public List<PeopleFirstName> randomSearch(Integer count){
+		loadPeopleFirstNames();
+		return RandomUtil.getRandomList(peopleFirstNames, count);		
+	};
+	
+
+	public List<PeopleFirstName> randomSearchGender(Integer count, String gender){
+		loadPeopleFirstNames();		
+		return RandomUtil.getRandomList(peopleFirstNames.stream()
+				.filter(p -> p.gender.toString().toLowerCase().equals(gender.toLowerCase()))
+				.collect(Collectors.toList()),count);
+	}
+
+	public List<PeopleFirstName> findAll() {
+		loadPeopleFirstNames();
+		return peopleFirstNames;
+	};
 	
 }
