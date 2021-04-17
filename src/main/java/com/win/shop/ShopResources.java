@@ -1,4 +1,4 @@
-package com.win.product;
+package com.win.shop;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,23 +8,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/v1/product")
-public class ProductResources {
+@RequestMapping("api/v1/shop")
+public class ShopResources {
 	
 	@Autowired
-	ProductService productService;
+	ShopService shopService;
 	
-	
-	@GetMapping("/")
-	public ResponseEntity<?> listProduct() {
-		return ResponseEntity.ok(productService.listAll());
-	}
-	
-	@GetMapping("/rnd")
+	@GetMapping("")
 	public ResponseEntity<?> randomSearch(@RequestParam(required = false) Integer count){
 		if (count == null) count = 1;
-		return ResponseEntity.ok(productService.randomSearch(count));
+		return ResponseEntity.ok(shopService.randomSearch(count));
 	}
-	
 
 }

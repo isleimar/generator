@@ -15,7 +15,7 @@ public class ProductService {
 		return productRepository.listAll();
 	}
 	
-	public List<Product> reandomSearch(Integer count){
+	public List<Product> randomSearch(Integer count){
 //		List<Product> products = productRepository.randomSearch(count);
 //		products.stream().forEach(p -> p.setDescription(loremService.getLoremForParagraph(3, false)));
 //		return products;
