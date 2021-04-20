@@ -33,4 +33,10 @@ public class LoremResources {
 		return ResponseEntity.ok(loremService.getLoremForPhrase(count));
 	}
 
+	@GetMapping("bytes")
+	public ResponseEntity<?> loremBytes(@RequestParam(required = false) Integer count, @RequestParam(required = false) Boolean hasIntro){
+		if (count == null) count = 100;
+		return ResponseEntity.ok(loremService.getLoremForBytes(count, hasIntro));
+	}
+
 }

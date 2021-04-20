@@ -26,6 +26,7 @@ public class LoremService {
 	private Boolean isNextPhrase = true;
 	private Boolean isNextParagraph = true;
 	
+	private int countBytes = 0;
 	private int countWord = 0;
 	private int countPhrase = 0;
 	private int countParagraph = 0;
@@ -58,8 +59,25 @@ public class LoremService {
 		}
 		return text;
 	}
+
+	public String getLoremForBytes(int count, Boolean hasIntroduction){
+		startAll();
+		String text = "";
+		count--;
+		while (countBytes < count){			
+			String newText = getNextWord(hasIntroduction);					
+			if (countBytes + newText.length() > count){
+				int size = count - countBytes;
+				newText = newText.substring(0, size);
+			}
+			text += newText;
+			countBytes = text.length();
+		}
+		return text + ".";
+	}
 	
 	private void startAll() {
+		countBytes = 0;
 		countParagraph = 0;
 		countPhrase = 0;
 		countWord = 0;
@@ -83,12 +101,11 @@ public class LoremService {
 	}
 	
 	private String getNextWord(Boolean hasIntroduction) {
-			
+		String word;
+		
 		if (isFinalParagraph()) return ".";
 		if (isFinalPhrase()) return ".";
-		if (isFinalComma()) return  ",";
-		
-		String word;
+		if (isFinalComma()) return  ",";		
 				
 		if (countWord < 8 && hasIntroduction) {
 			word = loremRepository.getWord(countWord);			
